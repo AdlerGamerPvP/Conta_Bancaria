@@ -3,7 +3,7 @@ import static java.lang.IO.*;
 public class Banco {
 
     private String titular;
-    private double saldo = 0;
+    private double saldo;
     private double limite;
     private double divida = 0;
 
@@ -20,10 +20,21 @@ public class Banco {
    public void depositar(){
         double deposito = Double.parseDouble(readln("Digite o valor para ser depositado: \n"));
         if(deposito > 0){
-        deposito = deposito - divida;
-        saldo = saldo + deposito;
-        println("voce depositou" + deposito + "R$ na sua conta \n");
+            deposito = deposito - divida;
+            limite = limite + divida;
+            divida = deposito - divida;
+            if (divida < 0){
+                divida = 0;
+            }
+            deposito = deposito - divida;
+        if(deposito > 0){
+            saldo = saldo + deposito;
+            println("voce depositou " + deposito + "R$ na sua conta \n");
         }
+        else{
+            println("Por causa da divida, seu saldo não foi alterado");
+        }
+       }
         else {
             println("Esse valor é invalido, tente novamente");
         }
@@ -41,7 +52,7 @@ public class Banco {
                 remqua = Double.parseDouble(readln("Digite o valor para retirar do limite: \n"));
                 if (limite - remqua > -1){
                     limite = limite - remqua;
-                    println("voce sacou " + remqua + " R$ do seu limite \n voce esta devendo" + remqua + "para o banco");
+                    println("voce sacou " + remqua + "R$ do seu limite \n voce esta devendo " + remqua + "para o banco");
                     divida = divida + remqua;
                 }
                 else {
@@ -58,11 +69,11 @@ public class Banco {
    }
    public Banco(String titular, double saldo, double limite){
         this.titular = titular;
-        this.saldo = saldo;
+        this.saldo = 0.0;
         this.limite = limite;
    }
     public String toString() {
-        return "Titular: " + titular + "\n" + "Saldo: " + saldo + "\n" + "Limite: " + limite +  "\n Divida: " + divida + "\n";
+        return "Titular: " + titular + "\n" + "Saldo: " + saldo + "\n" + "Limite: " + limite +  "\nDivida: " + divida + "\n";
     }
 
 }
