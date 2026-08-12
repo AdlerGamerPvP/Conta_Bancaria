@@ -16,7 +16,7 @@ void main() {
        else if (escolhas == 3){
            println(titular1);
        }
-       else{
+       else if (escolhas != 4){
            println("Escolha invalida, tente novamente");
        }
    }
