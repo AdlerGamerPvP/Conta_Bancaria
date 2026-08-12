@@ -41,7 +41,7 @@ public class Banco {
                 remqua = Double.parseDouble(readln("Digite o valor para retirar do limite: \n"));
                 if (limite - remqua > -1){
                     limite = limite - remqua;
-                    println("voce sacou" + remqua + "R$ do seu limite \n voce esta devendo" + remqua + "para o banco");
+                    println("voce sacou " + remqua + " R$ do seu limite \n voce esta devendo" + remqua + "para o banco");
                     divida = divida + remqua;
                 }
                 else {
